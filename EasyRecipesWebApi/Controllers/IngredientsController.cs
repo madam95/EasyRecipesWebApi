@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EasyRecipesWebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyRecipesWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class IngredientsController : ControllerBase
     {
-        // GET api/values
+        private readonly EasyRecipesContext _context;
+
+        // GET api/ingredients
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> GetIngredients()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/ingredients/id
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
+        // POST api/ingredients
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/ingredients/id
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/ingredients/id
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
