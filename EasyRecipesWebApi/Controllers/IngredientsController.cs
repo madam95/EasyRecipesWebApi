@@ -22,14 +22,14 @@ namespace EasyRecipesWebApi.Controllers
 
         // GET api/ingredients/id
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<string> GetIngredient(int id)
         {
             return "value";
         }
 
         // POST api/ingredients
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Create([FromBody] string value)
         {
         }
 
