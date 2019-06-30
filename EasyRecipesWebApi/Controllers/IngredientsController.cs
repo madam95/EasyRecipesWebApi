@@ -13,24 +13,40 @@ namespace EasyRecipesWebApi.Controllers
     {
         private readonly EasyRecipesContext _context;
 
+        public IngredientsController(EasyRecipesContext context)
+        {
+            _context = context;
+        }
+
         // GET api/ingredients
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetIngredients()
+        public ActionResult<IEnumerable<Ingredient>> GetIngredients()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Ingredients.ToList();
         }
 
         // GET api/ingredients/id
         [HttpGet("{id}")]
-        public ActionResult<string> GetIngredient(int id)
+        public ActionResult<Ingredient> GetIngredient(int id)
         {
-            return "value";
+            var ingredient = _context.Ingredients.Find(id);
+
+            if (ingredient == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ingredient);
         }
 
         // POST api/ingredients
         [HttpPost]
-        public void Create([FromBody] string value)
+        public ActionResult<Ingredient> CreateIngredient(Ingredient ingredient)
         {
+            _context.Ingredients.Add(ingredient);
+            _context.SaveChanges();
+
+            return CreatedAtAction("GetIngredient", new Ingredient{Id = ingredient.Id}, ingredient);
         }
 
         // PUT api/ingredients/id

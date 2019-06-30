@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -19,7 +20,9 @@ namespace EasyRecipesWebApi.Models
             modelBuilder
                 .Entity<Ingredient>()
                 .Property(e => e.Unit)
-                .HasConversion<string>();
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (MeasurementUnit) Enum.Parse(typeof(MeasurementUnit), v));
         }
 
         public DbSet<Ingredient> Ingredients { get; set; }

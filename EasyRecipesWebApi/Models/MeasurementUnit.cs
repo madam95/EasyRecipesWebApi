@@ -9,6 +9,8 @@
         Spoon,
         Tablespoon,
         Pinch,
-        Glass
+        Glass,
+        None
     }
 }
+

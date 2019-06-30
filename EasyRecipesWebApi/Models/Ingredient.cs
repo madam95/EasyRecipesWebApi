@@ -16,6 +16,7 @@ namespace EasyRecipesWebApi.Models
         [Required]
         public float Amount { get; set; }
         [Required]
+        [EnumDataType(typeof(MeasurementUnit))]
         public MeasurementUnit Unit { get; set; }
     }
 }
