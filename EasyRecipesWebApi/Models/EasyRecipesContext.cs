@@ -17,12 +17,6 @@ namespace EasyRecipesWebApi.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                .Entity<Ingredient>()
-                .Property(e => e.Unit)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (MeasurementUnit) Enum.Parse(typeof(MeasurementUnit), v));
         }
 
         public DbSet<Ingredient> Ingredients { get; set; }

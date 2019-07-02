@@ -1,16 +1,16 @@
-﻿namespace EasyRecipesWebApi.Models
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace EasyRecipesWebApi.Models
 {
-    //TODO Leave it in English and translate somewhere later on, or make the names in Polish???
-    public enum MeasurementUnit
+    public class MeasurementUnit
     {
-        Gram,
-        Millilitre,
-        Piece,
-        Spoon,
-        Tablespoon,
-        Pinch,
-        Glass,
-        None
+        public int Id { get; set; }
+        [Required] public string Unit { get; set; }
+
+        public ICollection<Ingredient> Ingredients { get; set; }
     }
 }
 
