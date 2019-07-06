@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EasyRecipesWebApi.Domain.Repositories;
 using EasyRecipesWebApi.Domain.Services;
 using EasyRecipesWebApi.Persistence.Contexts;
@@ -33,6 +34,7 @@ namespace EasyRecipesWebApi
             services.AddDbContext<EasyRecipesContext>(opt =>
                 opt.UseSqlServer(Configuration["EasyRecipesApiConnection:ConnectionString"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IIngredientRepository, IngredientsRepository>();
             services.AddScoped<IIngredientService, IngredientService>();

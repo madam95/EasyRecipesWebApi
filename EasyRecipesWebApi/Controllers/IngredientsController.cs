@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EasyRecipesWebApi.Domain.Models;
 using EasyRecipesWebApi.Domain.Services;
 using EasyRecipesWebApi.Persistence.Contexts;
@@ -13,13 +14,13 @@ namespace EasyRecipesWebApi.Controllers
     [ApiController]
     public class IngredientsController : ControllerBase
     {
-        private readonly EasyRecipesContext _context;
         private readonly IIngredientService _ingredientService;
+        private readonly IMapper _mapper;
 
-        public IngredientsController(EasyRecipesContext context, IIngredientService ingredientService)
+        public IngredientsController(IIngredientService ingredientService, IMapper mapper)
         {
-            _context = context;
             _ingredientService = ingredientService;
+            _mapper = mapper;
         }
 
         // GET api/ingredients
@@ -30,19 +31,19 @@ namespace EasyRecipesWebApi.Controllers
             return ingredients;
         }
 
-        // GET api/ingredients/id
-        [HttpGet("{id}")]
-        public ActionResult<Ingredient> Get(int id)
-        {
-            var ingredient = _context.Ingredients.Find(id);
+        //// GET api/ingredients/id
+        //[HttpGet("{id}")]
+        //public ActionResult<Ingredient> Get(int id)
+        //{
+        //    var ingredient = _context.Ingredients.Find(id);
 
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
+        //    if (ingredient == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(ingredient);
-        }
+        //    return Ok(ingredient);
+        //}
 
         //// POST api/ingredients
         //[HttpPost]
