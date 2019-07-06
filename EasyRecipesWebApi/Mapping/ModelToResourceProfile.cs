@@ -1,7 +1,12 @@
-﻿namespace EasyRecipesWebApi.Mapping
+﻿using AutoMapper;
+
+namespace EasyRecipesWebApi.Mapping
 {
-    public class ModelToResourceProfile
+    public class ModelToResourceProfile : Profile
     {
-        
+        public ModelToResourceProfile()
+        {
+            
+        }
     }
 }

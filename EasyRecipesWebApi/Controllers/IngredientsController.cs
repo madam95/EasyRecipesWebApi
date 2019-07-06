@@ -6,7 +6,9 @@ using AutoMapper;
 using EasyRecipesWebApi.Domain.Models;
 using EasyRecipesWebApi.Domain.Services;
 using EasyRecipesWebApi.Persistence.Contexts;
+using EasyRecipesWebApi.Resources;
 using Microsoft.AspNetCore.Mvc;
+using EasyRecipesWebApi.Extensions;
 
 namespace EasyRecipesWebApi.Controllers
 {
@@ -29,6 +31,15 @@ namespace EasyRecipesWebApi.Controllers
         {
             var ingredients = await _ingredientService.GetAllIngredientsAsync();
             return ingredients;
+        }
+
+        public async Task<IActionResult> PostIngredientAsync([FromBody] SaveIngredientResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessage());
+
+            _mapper.Map<SaveIngredientResource, Ingredient>(resource);
+
         }
 
         //// GET api/ingredients/id
