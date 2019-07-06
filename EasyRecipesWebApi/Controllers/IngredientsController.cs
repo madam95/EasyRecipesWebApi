@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EasyRecipesWebApi.Models;
+using EasyRecipesWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyRecipesWebApi.Controllers
@@ -12,22 +13,25 @@ namespace EasyRecipesWebApi.Controllers
     public class IngredientsController : ControllerBase
     {
         private readonly EasyRecipesContext _context;
+        private readonly IIngredientService _ingredientService;
 
-        public IngredientsController(EasyRecipesContext context)
+        public IngredientsController(EasyRecipesContext context, IIngredientService ingredientService)
         {
             _context = context;
+            _ingredientService = ingredientService;
         }
 
         // GET api/ingredients
         [HttpGet]
-        public ActionResult<IEnumerable<Ingredient>> GetIngredients()
+        public async Task<IEnumerable<Ingredient>> GetAllIngredientsAsync()
         {
-            return _context.Ingredients.ToList();
+            var ingredients = await _ingredientService.GetAllIngredientsAsync();
+            return ingredients;
         }
 
         // GET api/ingredients/id
         [HttpGet("{id}")]
-        public ActionResult<Ingredient> GetIngredient(int id)
+        public ActionResult<Ingredient> Get(int id)
         {
             var ingredient = _context.Ingredients.Find(id);
 
@@ -41,12 +45,12 @@ namespace EasyRecipesWebApi.Controllers
 
         // POST api/ingredients
         [HttpPost]
-        public ActionResult<Ingredient> CreateIngredient(Ingredient ingredient)
+        public ActionResult<Ingredient> Post(Ingredient ingredient)
         {
             _context.Ingredients.Add(ingredient);
             _context.SaveChanges();
 
-            return CreatedAtAction("GetIngredient", new Ingredient{Id = ingredient.Id}, ingredient);
+            return CreatedAtAction(nameof(Get), new Ingredient{ Id = ingredient.Id }, ingredient);
         }
 
         // PUT api/ingredients/id
