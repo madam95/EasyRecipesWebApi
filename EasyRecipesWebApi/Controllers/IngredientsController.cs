@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EasyRecipesWebApi.Models;
-using EasyRecipesWebApi.Services;
+using EasyRecipesWebApi.Domain.Models;
+using EasyRecipesWebApi.Domain.Services;
+using EasyRecipesWebApi.Persistence.Contexts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyRecipesWebApi.Controllers
@@ -43,15 +44,15 @@ namespace EasyRecipesWebApi.Controllers
             return Ok(ingredient);
         }
 
-        // POST api/ingredients
-        [HttpPost]
-        public ActionResult<Ingredient> Post(Ingredient ingredient)
-        {
-            _context.Ingredients.Add(ingredient);
-            _context.SaveChanges();
+        //// POST api/ingredients
+        //[HttpPost]
+        //public ActionResult<Ingredient> Post(Ingredient ingredient)
+        //{
+        //    _context.Ingredients.Add(ingredient);
+        //    _context.SaveChanges();
 
-            return CreatedAtAction(nameof(Get), new Ingredient{ Id = ingredient.Id }, ingredient);
-        }
+        //    return CreatedAtAction(nameof(Get), new Ingredient{ Id = ingredient.Id }, ingredient);
+        //}
 
         // PUT api/ingredients/id
         [HttpPut("{id}")]

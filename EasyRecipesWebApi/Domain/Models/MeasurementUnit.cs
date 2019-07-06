@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace EasyRecipesWebApi.Models
+namespace EasyRecipesWebApi.Domain.Models
 {
     public class MeasurementUnit
     {

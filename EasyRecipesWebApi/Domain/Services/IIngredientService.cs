@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EasyRecipesWebApi.Models;
+using EasyRecipesWebApi.Domain.Models;
 
-namespace EasyRecipesWebApi.Services
+namespace EasyRecipesWebApi.Domain.Services
 {
     public interface IIngredientService
     {

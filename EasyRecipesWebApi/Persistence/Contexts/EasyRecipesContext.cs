@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Threading.Tasks;
+﻿using EasyRecipesWebApi.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EasyRecipesWebApi.Models
+namespace EasyRecipesWebApi.Persistence.Contexts
 {
     public class EasyRecipesContext : DbContext
     {
@@ -31,3 +26,4 @@ namespace EasyRecipesWebApi.Models
         public DbSet<Ingredient> Ingredients { get; set; }
     }
 }
+

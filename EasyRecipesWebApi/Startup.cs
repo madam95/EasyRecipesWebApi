@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EasyRecipesWebApi.Models;
+using EasyRecipesWebApi.Domain.Repositories;
+using EasyRecipesWebApi.Domain.Services;
+using EasyRecipesWebApi.Persistence.Contexts;
+using EasyRecipesWebApi.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,12 +20,12 @@ namespace EasyRecipesWebApi
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -30,6 +33,9 @@ namespace EasyRecipesWebApi
             services.AddDbContext<EasyRecipesContext>(opt =>
                 opt.UseSqlServer(Configuration["EasyRecipesApiConnection:ConnectionString"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IIngredientRepository, IngredientsRepository>();
+            services.AddScoped<IIngredientService, IngredientService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
